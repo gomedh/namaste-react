@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM  from "react-dom";
+
 const heading = React.createElement("h1",{id:"heading"},"Hello world from react !!"); // core thing of react script1 , {} to give attributes to tag like id: "heading"
 
 // 1st arg -html tag, 2nd arg- attributes, 3rd children || content
