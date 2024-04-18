@@ -1,25 +1,27 @@
 import React from "react";
-import ReactDOM  from "react-dom";
+import ReactDOM  from "react-dom/client";
 
-const heading = React.createElement("h1",{id:"heading"},"Hello world from react !!"); // core thing of react script1 , {} to give attributes to tag like id: "heading"
 
-// 1st arg -html tag, 2nd arg- attributes, 3rd children || content
-const parent = React.createElement("div", {id:"parent"}, [
-            React.createElement( "div",{id:"child"},
-                [
-                    React.createElement ("h1",{},"Hello i am the child inner"),
-                    React.createElement ("h2",{},"Hello i am the other child inner")
+const TitleComponent = () => (
+    <h1>hello it is me</h1>
+);
+const title = (
+    <h1>
+        Hello title
+    </h1>
+)
+const number = 1000;
 
-                ]),
-            React.createElement( "div",{id:"child2"},
-                [
-                    React.createElement ("h1",{},"Hello i am the child inner2"),
-                    React.createElement ("h2",{},"Hello i am the other child inner2")
+// React functional Components
+const HeadingComponent = () => (
+    <div className="container">
+        <TitleComponent />
+        <h2>{number}</h2>
+        <h2>{title}</h2>
+        <h1 classNmae="heading">Namaste functional component</h1>
+    </div>
+);
+// const HeadingComponent = () => { return <h1 classNmae="heading">Namaste functional component</h1> }
 
-                ])
-]);
-
-console.log(parent); // React element object, which becomes the html on browser in render method
-
-const root = ReactDOM.createRoot(document.getElementById("root")) ; // core thing of react script2
-root.render(parent); // putting heading inside root // Replaces all the already existing content present inside the root with render argument
+const root = ReactDOM.createRoot(document.getElementById("root")); 
+root.render(<HeadingComponent />); // Syntax to babel to understand this is a functional Component
