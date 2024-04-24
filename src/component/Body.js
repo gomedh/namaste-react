@@ -1,65 +1,91 @@
 import RestaurantCard from "./RestaurantCard";
-import restrautList from "../utils/mockData"
-import { useState } from "react"; //named import statement while importing from react is 
+import { useState, useEffect } from "react"; //named import statement while importing from react is 
+import Shimmer from "./Shimmer";
+
 
 const BodyComponent = () => {
-    // local state variables
-    const [searchTerm, setSearchTerm] = useState(''); 
+    
     //usestate returns an array, just array destructuring where 
     // first element is the state variable and second element is a function to update the state variable and 
     // it is same as arr[0] and arr[1] for example
     // const arr = useState(restList);
     // const filteredRestaurants = arr[0];
     // const setRestaurants = arr[1];
+    
+// *********************************** -- All local State Variables -- *************************************************************
+    const [searchTerm, setSearchTerm] = useState(''); 
     const [showTopRated, setShowTopRated] = useState(false);
     const [showLeastRated, setShowLeastRated] = useState(false);
-    const [filteredRestaurants, setFilteredRestaurants] = useState(restrautList); // just like let listofRestaurants = restrautList;
+    const [listOfRestaurants, setListOfRestaurants] = useState([]); // just like let listofRestaurants = restrautList;
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
+// *********************************** -- All the Methods -- *************************************************************
+    //Method to handle search text change by user 
     const handleSearch = (event) => {
         const searchTerm = event.target.value;
         setSearchTerm(searchTerm);
-        const filtered = restrautList.filter(
-            restaurant => restaurant.data.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const filtered = listOfRestaurants.filter(
+            restaurant => restaurant.info.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredRestaurants(filtered);
     }
 
-
+    // Method for show all restaurants
     const showAll = () => {
-        setFilteredRestaurants(restrautList);
+        setFilteredRestaurants(listOfRestaurants);
         setShowTopRated(false);
         setShowLeastRated(false);
     };
 
+    // Method for top rated restaurants
     const filterTopRatedRestaurants = () => {
-        const filtered = restrautList.filter(
-            restaurant => restaurant.data.avgRating > 4
+        const filtered = listOfRestaurants.filter(
+            restaurant => restaurant.info.avgRating > 4
         );
         setFilteredRestaurants(filtered);
-        setShowTopRated(true);
-        setShowLeastRated(false);
     };
 
+
+    // Method for least rated restaurants
     const filterLeastRatedRestaurants = () => {
-        const filtered = restrautList.filter(
-            restaurant => restaurant.data.avgRating < 3
+        const filtered = listOfRestaurants.filter(
+            restaurant => restaurant.info.avgRating < 4
         );
         setFilteredRestaurants(filtered);
-        setShowLeastRated(true);
-        setShowTopRated(false);
     };
 
-    return (
+// *********************************** -- API data fetch -- *************************************************************
+
+    // Method to fetch data from API
+    useEffect(() => {
+        fetchData();
+    }, []); // called as soon as the component is loaded & with [] it will be called only once.
+
+    const fetchData = async () => {
+        const data = await fetch(
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+        ); //Part of JS engine to get data
+
+        const json = await data.json(); 
+        const restList = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        setListOfRestaurants(restList);
+        setFilteredRestaurants(restList);
+    }
+
+
+// *********************************** -- JSX retrun -- *************************************************************
+    return listOfRestaurants.length === 0 ? <Shimmer /> : (
         <div className="body">
-            <div className="search">
-                <input
-                    type="text"
-                    placeholder="Restaurant Name..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </div>
             <div className="filter">
+                <div className="search">
+                        <input
+                            type="text"
+                            className="search-box"
+                            placeholder="Search..."
+                            value={searchTerm}
+                            onChange={handleSearch}
+                        />
+                </div>
                 <button className="filter-btn"  onClick={showAll}>
                     Show All Restaurants
                 </button>
@@ -74,7 +100,7 @@ const BodyComponent = () => {
                 {
                     filteredRestaurants.map((restaurant) => 
                     (
-                    <RestaurantCard  key={restaurant.data.id} 
+                    <RestaurantCard  key={restaurant?.info?.id} 
                     resData = {restaurant} 
                     />))
                 }
@@ -82,5 +108,7 @@ const BodyComponent = () => {
         </div>
     )
 };
+
+// *********************************** -- Module Export -- *************************************************************
 
 export default BodyComponent;
