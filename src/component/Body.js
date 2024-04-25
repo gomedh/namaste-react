@@ -14,8 +14,6 @@ const BodyComponent = () => {
     
 // *********************************** -- All local State Variables -- *************************************************************
     const [searchTerm, setSearchTerm] = useState(''); 
-    const [showTopRated, setShowTopRated] = useState(false);
-    const [showLeastRated, setShowLeastRated] = useState(false);
     const [listOfRestaurants, setListOfRestaurants] = useState([]); // just like let listofRestaurants = restrautList;
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
@@ -33,8 +31,6 @@ const BodyComponent = () => {
     // Method for show all restaurants
     const showAll = () => {
         setFilteredRestaurants(listOfRestaurants);
-        setShowTopRated(false);
-        setShowLeastRated(false);
     };
 
     // Method for top rated restaurants
@@ -63,7 +59,7 @@ const BodyComponent = () => {
 
     const fetchData = async () => {
         const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+            "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
         ); //Part of JS engine to get data
 
         const json = await data.json(); 
@@ -71,6 +67,8 @@ const BodyComponent = () => {
         setListOfRestaurants(restList);
         setFilteredRestaurants(restList);
     }
+
+    if (!listOfRestaurants) {return null;}
 
 
 // *********************************** -- JSX retrun -- *************************************************************
