@@ -10,3 +10,9 @@
 - Compress
 - Bundling
 - Tree Shaking
+
+
+
+# Routing in Web Application
+- Client side routing - eg SPA
+- Server side routing - gets html from server and refreshes whole page

@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react"; //named import statement while importing from react is 
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 
 const BodyComponent = () => {
@@ -59,10 +60,12 @@ const BodyComponent = () => {
 
     const fetchData = async () => {
         const data = await fetch(
-            "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-        ); //Part of JS engine to get data
+            
+            "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        ) ; //Part of JS engine to get data
 
-        const json = await data.json(); 
+        const json = await data.json();
+        console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         const restList = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setListOfRestaurants(restList);
         setFilteredRestaurants(restList);
@@ -94,13 +97,16 @@ const BodyComponent = () => {
                     Least Rated Restaurant
                 </button>
             </div>
-            <div className="res-container">
+            <div className="res-container" >
                 {
                     filteredRestaurants.map((restaurant) => 
-                    (
-                    <RestaurantCard  key={restaurant?.info?.id} 
-                    resData = {restaurant} 
-                    />))
+                    (   // Key should be on the parent JSX element
+                        <Link key={restaurant?.info?.id} to= {"/restaurants/" + restaurant.info.id}>
+                            <RestaurantCard Link={restaurant?.cta?.link}  
+                                resData = {restaurant} 
+                            />
+                        </Link>
+                    ))
                 }
             </div>
         </div>
