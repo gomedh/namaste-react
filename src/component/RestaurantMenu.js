@@ -7,8 +7,6 @@ const RestaurantMenu = () => {
 
     const [menuData, setMenuData] = useState(null);
     const {resId} = useParams();
-    console.log(resId);
-
 
 // *********************************** -- API data fetch -- *************************************************************
 
@@ -22,7 +20,6 @@ const RestaurantMenu = () => {
         );
 
         const json = await data.json();
-        console.log(json);
         setMenuData(json.data);
     }
 

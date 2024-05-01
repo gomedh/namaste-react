@@ -100,9 +100,9 @@ const BodyComponent = () => {
             <div className="res-container" >
                 {
                     filteredRestaurants.map((restaurant) => 
-                    (   // Key should be on the parent JSX element
-                        <Link key={restaurant?.info?.id} to= {"/restaurants/" + restaurant.info.id}>
-                            <RestaurantCard Link={restaurant?.cta?.link}  
+                    (   // Key should be on the parent JSX element ideally it should be like this {"/restaurants/" + restaurant.info.id}
+                        <Link key={restaurant?.info?.id} to= {restaurant?.cta?.link}>
+                            <RestaurantCard
                                 resData = {restaurant} 
                             />
                         </Link>
