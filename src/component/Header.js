@@ -1,6 +1,7 @@
 import { LOGO_URL } from "../utils/constants";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // used to navigate to other pages without reloading the page.
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 const HeaderComponent = () => {
@@ -8,6 +9,7 @@ const HeaderComponent = () => {
 // *********************************** -- All local State Variables -- *************************************************************
 
     const [btnName, setBtnName] = useState("Login");
+    const onlineStatus = useOnlineStatus();
 
 // *********************************** -- All the Methods -- *************************************************************
 
@@ -19,9 +21,9 @@ const HeaderComponent = () => {
     // if dependecy array is empty then it will be called on initial render.
     // if dependency array is [btnName] then it will be called only when btnName changes.
 
-    useEffect(() => {
-        console.log("Header component is rendered");
-    });
+    // useEffect(() => {
+    //     console.log("Header component is rendered");
+    // });
 
 // *********************************** -- JSX retrun -- *************************************************************
     return (
@@ -33,10 +35,11 @@ const HeaderComponent = () => {
             </div>
             <div className="nav-items">
                 <ul>
+                    <li>Online Status: {onlineStatus ? "✅" : "🔴"}  </li>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/contact">Contact us </Link></li>
-                    {/* <li>Cart</li> */}
+                    <li><Link to="/grocery">Grocery </Link></li>
                     <button className="login-btn" 
                     onClick={buttonName}>
                         {btnName}

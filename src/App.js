@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import ReactDOM  from "react-dom/client";
 import HeaderComponent from "./component/Header";
 import BodyComponent from "./component/Body";
@@ -7,6 +7,7 @@ import Contact from "./component/Contact";
 import Error from "./component/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./component/RestaurantMenu";
+// import Grocery from "./component/Grocery";
 
 
 /**
@@ -27,6 +28,8 @@ import RestaurantMenu from "./component/RestaurantMenu";
       - Copyright
     
 */
+
+const Grocery = lazy(() => import("./component/Grocery")); // for the concept of lazy loading., no need to import the grocery at line 10
 
 const AppLayout = () => {
     return (
@@ -57,6 +60,11 @@ const appRouter = createBrowserRouter([
             {
                 path: "/restaurants/:resId",
                 element: <RestaurantMenu />
+            },
+            {
+                path: "/grocery",
+                element: <Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense> // have to use Suspense for lazy loading, to prevent react from rendering before the grocery component is loaded.
+                //fallback inside the Suspense component is like showing something while the grocery component is being loaded.
             }
         ],
         errorElement: <Error /> // if there is an error

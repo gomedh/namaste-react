@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react"; //named import statement while importing from react is 
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 const BodyComponent = () => {
@@ -65,7 +66,6 @@ const BodyComponent = () => {
         ) ; //Part of JS engine to get data
 
         const json = await data.json();
-        console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         const restList = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setListOfRestaurants(restList);
         setFilteredRestaurants(restList);
@@ -75,6 +75,13 @@ const BodyComponent = () => {
 
 
 // *********************************** -- JSX retrun -- *************************************************************
+    
+    const onlineStatus = useOnlineStatus();
+
+    if (onlineStatus === false) return (
+        <h1>Network Offline...!! Please check your Internet</h1>
+    )
+
     return listOfRestaurants.length === 0 ? <Shimmer /> : (
         <div className="body">
             <div className="filter">
