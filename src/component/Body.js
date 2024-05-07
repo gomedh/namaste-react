@@ -84,27 +84,27 @@ const BodyComponent = () => {
 
     return listOfRestaurants.length === 0 ? <Shimmer /> : (
         <div className="body">
-            <div className="filter">
-                <div className="search">
+            <div className="flex justify-between item-center">
                         <input
                             type="text"
-                            className="search-box"
+                            className="border border-solid border-black m-4"
                             placeholder="Search..."
                             value={searchTerm}
                             onChange={handleSearch}
                         />
+                <div class="flex">
+                    <button className=" px-2 py-2 bg-green-300 m-4 hover:bg-green-400 rounded-lg font-semibold"  onClick={showAll}>
+                        Show All Restaurants
+                    </button>
+                    <button className=" px-2 py-2 bg-green-300 m-4  hover:bg-green-400 rounded-lg font-semibold"  onClick={filterTopRatedRestaurants}>
+                        Top Rated Restaurant
+                    </button>
+                    <button className=" px-2 py-2 bg-green-300 m-4  hover:bg-green-400 rounded-lg font-semibold"  onClick={filterLeastRatedRestaurants}>
+                        Least Rated Restaurant
+                    </button>
                 </div>
-                <button className="filter-btn"  onClick={showAll}>
-                    Show All Restaurants
-                </button>
-                <button className="filter-btn"  onClick={filterTopRatedRestaurants}>
-                    Top Rated Restaurant
-                </button>
-                <button className="filter-btn"  onClick={filterLeastRatedRestaurants}>
-                    Least Rated Restaurant
-                </button>
             </div>
-            <div className="res-container" >
+            <div className="flex flex-wrap" >
                 {
                     filteredRestaurants.map((restaurant) => 
                     (   // Key should be on the parent JSX element ideally it should be like this {"/restaurants/" + restaurant.info.id}

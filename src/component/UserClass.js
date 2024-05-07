@@ -44,11 +44,11 @@ class UserClass extends React.Component {
 
     render() {
         // const {name, place, contact} = this.props;
-        console.log(this.state.userInfo, 'ff');
         const {name, location, contact, html_url, avatar_url} = this.state.userInfo;
         // const {count} = this.state;
         return (
-            <div className="user-card">
+            <a>
+                <div>
              {/* <h2>Count: {this.state.count}</h2> */}
              {/* <button onClick={
                 () => {
@@ -65,11 +65,12 @@ class UserClass extends React.Component {
                     })
                 }
                 }>Counter Decrease</button> */}
-                <img className="avatar" src={avatar_url}></img>
+            <img className="avatar" src={avatar_url}></img>
              <h2>Name: {name}</h2>
              <h2>Place: {location}</h2>
-             <h2><a href={html_url}>Github</a></h2>
+             <h2>Email: "gomedh.tak1@gmail.com"</h2>
          </div>
+            </a>
         )
     }   
 }

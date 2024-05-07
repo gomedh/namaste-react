@@ -27,20 +27,20 @@ const HeaderComponent = () => {
 
 // *********************************** -- JSX retrun -- *************************************************************
     return (
-        <div className="header">
-            <div className="logo-container">
+        <div className="flex justify-between item-center bg-pink-100 shadow-lg">
+            <div className="w-20">
                 <Link to="/"> 
-                    <img className="logo" src= {LOGO_URL}></img>
+                    <img className="w-20" src= {LOGO_URL}></img>
                 </Link>
             </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Online Status: {onlineStatus ? "✅" : "🔴"}  </li>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About Us</Link></li>
-                    <li><Link to="/contact">Contact us </Link></li>
-                    <li><Link to="/grocery">Grocery </Link></li>
-                    <button className="login-btn" 
+            <div className="flex">
+                <ul className="flex p-4 m-4">
+                    <li className="px-4">Online Status: {onlineStatus ? "✅" : "🔴"}  </li>
+                    <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/">Home</Link></li>
+                    <li className="px-4 hover:bg-pink-200 rounded-lg "><Link to="/about">About Us</Link></li>
+                    <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/contact">Contact us </Link></li>
+                    <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/grocery">Grocery </Link></li>
+                    <button className="px-4 hover:bg-pink-200 rounded-lg" 
                     onClick={buttonName}>
                         {btnName}
                     </button> 
