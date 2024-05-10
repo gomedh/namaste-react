@@ -1,12 +1,13 @@
-import React, {lazy, Suspense} from "react";
+import React, {lazy, Suspense, useEffect, useState} from "react";
 import ReactDOM  from "react-dom/client";
 import HeaderComponent from "./component/Header";
 import BodyComponent from "./component/Body";
-import About from "./component/About";
+// import About from "./component/About";
 import Contact from "./component/Contact";
 import Error from "./component/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./component/RestaurantMenu";
+import UserContext from "./utils/userContext";
 // import Grocery from "./component/Grocery";
 
 
@@ -30,13 +31,28 @@ import RestaurantMenu from "./component/RestaurantMenu";
 */
 
 const Grocery = lazy(() => import("./component/Grocery")); // for the concept of lazy loading., no need to import the grocery at line 10
+const About = lazy(() => import("./component/About"));
 
 const AppLayout = () => {
+
+    const [userName, setuserName] = useState();
+
+    useEffect(() => {
+        // Making a dummy api call for user name
+        const data = {
+            name: "Gomedh Tak"
+        };
+        setuserName(data.name);
+    }, []);
+
     return (
-        <div className="app">
-            <HeaderComponent />
-            <Outlet />
-        </div>
+        // Anywhere inside the app , we have context provider
+        <UserContext.Provider value={{loggedInUser: userName, setuserName}}>
+            <div className="app">
+                <HeaderComponent />
+                <Outlet />
+            </div>
+        </ UserContext.Provider>
     )
 };
 
@@ -51,7 +67,7 @@ const appRouter = createBrowserRouter([
             },
             {
                 path: "/about",
-                element: <About />
+                element: <Suspense fallback={<h1>Loading...</h1>}><About /></Suspense>
             },
             {
                 path: "/contact",

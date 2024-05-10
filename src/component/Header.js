@@ -1,7 +1,8 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom"; // used to navigate to other pages without reloading the page.
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/userContext";
 
 
 const HeaderComponent = () => {
@@ -10,6 +11,7 @@ const HeaderComponent = () => {
 
     const [btnName, setBtnName] = useState("Login");
     const onlineStatus = useOnlineStatus();
+    const data = useContext(UserContext);
 
 // *********************************** -- All the Methods -- *************************************************************
 
@@ -27,26 +29,27 @@ const HeaderComponent = () => {
 
 // *********************************** -- JSX retrun -- *************************************************************
     return (
-        <div className="flex justify-between item-center bg-pink-100 shadow-lg">
-            <div className="w-20">
-                <Link to="/"> 
-                    <img className="w-20" src= {LOGO_URL}></img>
-                </Link>
-            </div>
-            <div className="flex">
-                <ul className="flex p-4 m-4">
-                    <li className="px-4">Online Status: {onlineStatus ? "✅" : "🔴"}  </li>
-                    <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/">Home</Link></li>
-                    <li className="px-4 hover:bg-pink-200 rounded-lg "><Link to="/about">About Us</Link></li>
-                    <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/contact">Contact us </Link></li>
-                    <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/grocery">Grocery </Link></li>
-                    <button className="px-4 hover:bg-pink-200 rounded-lg" 
-                    onClick={buttonName}>
-                        {btnName}
-                    </button> 
-                </ul>
-            </div>
-        </div>
+<div className="flex justify-between items-center bg-pink-100 shadow-lg">
+    <Link to="/" className="flex items-center">
+        <img className="w-20 ml-1" src={LOGO_URL} alt="Logo" />
+        <span className="ml-2 font- font-extrabold">FORK YOU !!</span>
+    </Link>
+    <div className="flex">
+        <ul className="flex p-4 m-4 font-bold"> 
+            <li className="px-4">Online Status: {onlineStatus ? "✅" : "🔴"}</li>
+            <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/">Home</Link></li>
+            <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/about">About Us</Link></li>
+            <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/contact">Contact us</Link></li>
+            <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/grocery">Grocery</Link></li>
+            <button className="px-4 hover:bg-pink-200 rounded-lg" onClick={buttonName}>
+                {btnName}
+            </button> 
+            <li className="px-4 hover:bg-pink-200 rounded-lg">{data?.loggedInUser}</li>
+        </ul>
+    </div>
+</div>
+
+
     )
 };
 

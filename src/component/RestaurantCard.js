@@ -27,4 +27,20 @@ const RestaurantCard = (props) => {
     )
 };
 
+// Higher oreder component
+// input -> RestaurantCard -> PromotedRestaurant
+
+export const withPromotionLabel = (RestaurantCard) => {
+    return (props) => {
+        return (
+            <div>
+                {
+                    ( <label className="absolute bg-black text-white m-2 p-2 rounded-xl">Top Rated</label>)
+                }
+            <RestaurantCard {...props}/>
+            </div>
+        )
+    }
+};
+
 export default RestaurantCard;

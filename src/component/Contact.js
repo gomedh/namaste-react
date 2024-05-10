@@ -1,7 +1,18 @@
+import { useContext } from "react";
+import UserContext from "../utils/userContext";
+
 const Contact = () => {
+
+    const {loggedInUser, setuserName} = useContext(UserContext);
+
     return (
-        <div>
-            <h1>Contact Us</h1>
+        <div className="text-center">
+            <input
+                className="border border-black p-2"
+                placeholder="Username"
+                value={loggedInUser}
+                onChange={(e) => setuserName(e.target.value)}
+            />
         </div>
     )
 }

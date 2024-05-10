@@ -1,5 +1,5 @@
 import React from "react";
-import { GIT_USER_URL } from "../utils/constants";
+import { GIT_USER_URL, GIT_URL } from "../utils/constants";
 
 class UserClass extends React.Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class UserClass extends React.Component {
         const {name, location, contact, html_url, avatar_url} = this.state.userInfo;
         // const {count} = this.state;
         return (
-            <a>
+            <a href={GIT_URL} target="_blank">
                 <div>
              {/* <h2>Count: {this.state.count}</h2> */}
              {/* <button onClick={
@@ -68,7 +68,7 @@ class UserClass extends React.Component {
             <img className="avatar" src={avatar_url}></img>
              <h2>Name: {name}</h2>
              <h2>Place: {location}</h2>
-             <h2>Email: "gomedh.tak1@gmail.com"</h2>
+             <h2>Email: gomedh.tak1@gmail.com</h2>
          </div>
             </a>
         )
