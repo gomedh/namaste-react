@@ -19,8 +19,6 @@ const RestaurantMenu = () => {
         c => c.card?.["card"]?.["@type"]=== "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
         )
 
-        console.log(categories,'cat');
-
     const {name, cuisines,  costForTwoMessage} = menuData?.cards[2].card?.card?.info;
 
 // *********************************** -- JSX retrun -- *************************************************************
@@ -35,7 +33,6 @@ const RestaurantMenu = () => {
             {
                 categories.map((category, index) => 
                 {   // Controlled Component - Parent is controlling the state of the component.
-                    console.log(showIndex, 'index');
                     return <RestaurantCategory 
                             key={category?.card?.card?.title} 
                             data={category} 

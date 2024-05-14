@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom"; // used to navigate to other pages without reloading the page.
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 
 const HeaderComponent = () => {
@@ -27,6 +28,10 @@ const HeaderComponent = () => {
     //     console.log("Header component is rendered");
     // });
 
+    //Subscribing to the store using the selector
+    const cartItems = useSelector((store) => store.cart.items);
+    // console.log(cartItems, 'header');
+
 // *********************************** -- JSX retrun -- *************************************************************
     return (
 <div className="flex justify-between items-center bg-pink-100 shadow-lg">
@@ -36,15 +41,16 @@ const HeaderComponent = () => {
     </Link>
     <div className="flex">
         <ul className="flex p-4 m-4 font-bold"> 
-            <li className="px-4">Online Status: {onlineStatus ? "✅" : "🔴"}</li>
+            {/* <li className="px-4">Online Status: {onlineStatus ? "✅" : "🔴"}</li> */}
             <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/">Home</Link></li>
             <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/about">About Us</Link></li>
             <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/contact">Contact us</Link></li>
-            <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/grocery">Grocery</Link></li>
-            <button className="px-4 hover:bg-pink-200 rounded-lg" onClick={buttonName}>
+            {/* <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/grocery">Grocery</Link></li> */}
+            <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/cart">Cart - ({cartItems.length})</Link></li>
+            {/* <button className="px-4 hover:bg-pink-200 rounded-lg" onClick={buttonName}>
                 {btnName}
             </button> 
-            <li className="px-4 hover:bg-pink-200 rounded-lg">{data?.loggedInUser}</li>
+            <li className="px-4 hover:bg-pink-200 rounded-lg">{data?.loggedInUser}</li> */}
         </ul>
     </div>
 </div>

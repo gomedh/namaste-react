@@ -2,13 +2,16 @@ import React, {lazy, Suspense, useEffect, useState} from "react";
 import ReactDOM  from "react-dom/client";
 import HeaderComponent from "./component/Header";
 import BodyComponent from "./component/Body";
-// import About from "./component/About";
 import Contact from "./component/Contact";
 import Error from "./component/Error";
+import Cart from "./component/Cart";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./component/RestaurantMenu";
 import UserContext from "./utils/userContext";
-// import Grocery from "./component/Grocery";
+import {Provider} from "react-redux";
+import appStore from "./utils/appStore";
+import Checkout from "./component/Checkout";
+
 
 
 /**
@@ -46,13 +49,15 @@ const AppLayout = () => {
     }, []);
 
     return (
-        // Anywhere inside the app , we have context provider
-        <UserContext.Provider value={{loggedInUser: userName, setuserName}}>
-            <div className="app">
-                <HeaderComponent />
-                <Outlet />
-            </div>
-        </ UserContext.Provider>
+       <Provider store={appStore}>
+            {/* // Anywhere inside the app , we have context provider */}
+            <UserContext.Provider value={{loggedInUser: userName, setuserName}}>
+                <div className="app">
+                    <HeaderComponent />
+                    <Outlet />
+                </div>
+            </ UserContext.Provider>
+       </Provider>
     )
 };
 
@@ -76,6 +81,14 @@ const appRouter = createBrowserRouter([
             {
                 path: "/restaurants/:resId",
                 element: <RestaurantMenu />
+            },
+            {
+                path: "/cart",
+                element: <Cart />
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />
             },
             {
                 path: "/grocery",

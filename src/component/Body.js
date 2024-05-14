@@ -41,7 +41,7 @@ const BodyComponent = () => {
     // Method for top rated restaurants
     const filterTopRatedRestaurants = () => {
         const filtered = listOfRestaurants.filter(
-            restaurant => restaurant.info.avgRating > 4.3
+            restaurant => restaurant.info.avgRating > 4.5
         );
         setFilteredRestaurants(filtered);
     };
@@ -64,7 +64,6 @@ const BodyComponent = () => {
 
     const fetchData = async () => {
         const data = await fetch(
-            
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
         ) ; //Part of JS engine to get data
 
@@ -114,7 +113,7 @@ const BodyComponent = () => {
                         <Link key={restaurant?.info?.id} to={"/restaurants/" + restaurant?.info?.id}>
                             {/* if the restaurant is top rated then add top rated label to it */}
                             {
-                                restaurant?.info?.avgRating > 4.3 ? (
+                                restaurant?.info?.avgRating > 4.5 ? (
                                     <RestaurantCardPromoted  resData = {restaurant}/>
                                 ) : (
                                     <RestaurantCard

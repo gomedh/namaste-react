@@ -29,7 +29,7 @@ class UserClass extends React.Component {
                 userInfo: json
             }
         )
-        console.log(this.state.userInfo, 'dd');
+        // console.log(this.state.userInfo, 'dd');
     }
 
     componentDidUpdate() {
