@@ -61,9 +61,6 @@
 - have to create .parcelRC file to disable default transpilcation
 - Jest COnfiguration (npx jest --init)
 - Install Jsdom library
-- install @babel/preset-react to make jsx work in test cases
-- include @babel/preset-react inside the babel config
-- Install @testing-library/jest-dom
 
 
 

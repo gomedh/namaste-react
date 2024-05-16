@@ -45,12 +45,12 @@ const HeaderComponent = () => {
             <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/">Home</Link></li>
             <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/about">About Us</Link></li>
             <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/contact">Contact us</Link></li>
-            {/* <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/grocery">Grocery</Link></li> */}
+            <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/grocery">Grocery</Link></li>
             <li className="px-4 hover:bg-pink-200 rounded-lg"><Link to="/cart">Cart - ({cartItems.length})</Link></li>
-            {/* <button className="px-4 hover:bg-pink-200 rounded-lg" onClick={buttonName}>
+            <button className="px-4 hover:bg-pink-200 rounded-lg" onClick={buttonName}>
                 {btnName}
             </button> 
-            <li className="px-4 hover:bg-pink-200 rounded-lg">{data?.loggedInUser}</li> */}
+            <li className="px-4 hover:bg-pink-200 rounded-lg">{data?.loggedInUser}</li>
         </ul>
     </div>
 </div>
